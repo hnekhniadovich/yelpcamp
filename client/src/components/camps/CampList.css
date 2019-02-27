@@ -1,13 +1,12 @@
 .jumbotron {
     margin: 20px 0;
     background-color: #F0EDED;
-    font-size: 22px;
+    font-size: 20px;
     padding: 50px 70px;
 }  
     
 .jumbotron h1 {
     font-size: 50px;
     font-weight: 600;
-    letter-spacing: 0.1rem;
     margin-bottom: 30px;
 }

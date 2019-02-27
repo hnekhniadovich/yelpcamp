@@ -10,7 +10,7 @@ import Header from './Header';
 
 const App = () => {
     return (
-        <div style={{fontFamily: 'Source Sans Pro'}}> 
+        <div>
             <BrowserRouter>
                 <div>
                     <Header />

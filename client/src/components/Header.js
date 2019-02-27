@@ -5,16 +5,19 @@ import { Nav, Navbar } from 'react-bootstrap';
 
 const Header = () => {
     return (
-        <Navbar bg="dark" variant="dark" className="justify-content-between">
-            <Navbar.Brand href="/">YelpCamp</Navbar.Brand>
-            <Nav>
-                <Nav.Link href="#home">Login</Nav.Link>
-                <Nav.Link href="#features">Sign Up</Nav.Link>
-            </Nav>
+        <Navbar bg="dark" variant="dark" 
+                collapseOnSelect expand="sm" bg="dark" variant="dark">
+            <Link to="/" className="navbar-brand">YelpCamp</Link>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end">
+                <Nav>
+                    <Link to="/signin" className="nav-link">Login</Link>
+                    <Link to="/signup" className="nav-link">Sign Up</Link>
+                </Nav>
+            </Navbar.Collapse>
         </Navbar>
     )
 }
 
 export default Header;
 
-{/* <Link to="/">YelpCamp</Link> */}
