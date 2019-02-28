@@ -16,9 +16,9 @@ const App = () => {
                     <Header />
                     <Route path="/" exact component={CampList} />
                     <Route path="/camps/new" exact component={CampCreate} />
-                    <Route path="/camps/edit" exact component={CampEdit} />
+                    <Route path="/camps/edit/:id" exact component={CampEdit} />
                     <Route path="/camps/delete" exact component={CampDelete} />
-                    <Route path="/camps/show" exact component={CampShow} />
+                    <Route path="/camps/:id" exact component={CampShow} />
                 </div>
             </BrowserRouter>
         </div>

@@ -5,8 +5,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 
 const Header = () => {
     return (
-        <Navbar bg="dark" variant="dark" 
-                collapseOnSelect expand="sm" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
             <Link to="/" className="navbar-brand">YelpCamp</Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end">
