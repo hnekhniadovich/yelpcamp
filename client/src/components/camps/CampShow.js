@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchCamp } from '../../actions';
 
 class CampShow extends Component {
     
+    componentDidMount() {
+         const { id } = this.props.match.params;
+         this.props.fetchCamp(id);   
+    }
+
     render() {
-        console.log(this.props);
+
+        if(!this.props.camp) {
+            return <div>Loading...</div>
+        }
+
         const { id, name, price, description, image } = this.props.camp;
-        // console.log(camp);
+     
         return (
             <div className="container" style={{marginTop: "20px"}}>
                 <div className="row">
@@ -40,8 +50,8 @@ class CampShow extends Component {
     };
 };
 
-const mapStateToProps = (state) => {
-    return { camp: state.selectedCamp };
+const mapStateToProps = (state, ownProps) => {
+    return { camp: state.camps[ownProps.match.params.id] };
 }
 
-export default connect(mapStateToProps)(CampShow);
+export default connect(mapStateToProps, { fetchCamp })(CampShow);
