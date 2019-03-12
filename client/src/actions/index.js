@@ -2,8 +2,8 @@ import camps from '../apis/camps';
 
 import { 
     FETCH_CAMPS,
-    FETCH_CAMP
-    // CREATE_CAMP,
+    FETCH_CAMP,
+    CREATE_CAMP
     // EDIT_CAMP,
     // DELETE_CAMP
  } from './types';
@@ -19,6 +19,17 @@ export const fetchCamp = (id) => async dispatch => {
 
     dispatch({ type: FETCH_CAMP, payload: response.data });
 };
+
+export const createCamp = formValues => async (dispatch) => {
+    const response = await camps.post('/camps', { ...formValues } );
+
+    dispatch({ type: CREATE_CAMP, payload: response.data });
+
+    //Do some programmatic navigation to
+    //get the user back to the root route
+
+    //history.push('/');
+} 
 
 
 

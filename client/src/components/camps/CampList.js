@@ -13,6 +13,7 @@ class CampList extends Component {
     }
 
     renderCards() {
+        console.log(this.props.camps);
         return this.props.camps.map((camp) => {
             return (
                 <div className="col-md-3 col-sm-6" style={{margin: "10px 0"}} key={camp._id}>

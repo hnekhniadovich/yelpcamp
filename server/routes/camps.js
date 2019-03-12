@@ -26,4 +26,21 @@ router.get('/:id', function(req, res) {
     });     
 });
 
+router.post('/', function(req, res){
+    var name = req.body.name;
+    var price = req.body.price;
+    var image = req.body.imageUrl;
+    var description = req.body.description;
+
+    var newCamp = {name: name, image: image, price: price, description: description};
+
+    Camp.create(newCamp, function(err, newlyCreated){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(newlyCreated);
+        }
+    })
+})
+
 module.exports = router;
