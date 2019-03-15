@@ -1,11 +1,12 @@
 import camps from '../apis/camps';
+import history from '../history';
 
 import { 
     FETCH_CAMPS,
     FETCH_CAMP,
-    CREATE_CAMP
-    // EDIT_CAMP,
-    // DELETE_CAMP
+    CREATE_CAMP,
+    EDIT_CAMP,
+    DELETE_CAMP
  } from './types';
 
 export const fetchCamps = () => async dispatch => {
@@ -13,6 +14,14 @@ export const fetchCamps = () => async dispatch => {
 
     dispatch({ type: FETCH_CAMPS, payload: response.data });
 };
+
+// export const fetchCamps = () => dispatch => {
+//     return axios.get('http://localhost:3001.get/camps')
+//     .then(response => {
+//         dispatch({ type: FETCH_CAMPS, payload: response.data });
+//     })
+//     .catch(error => console.log(error));
+// };
 
 export const fetchCamp = (id) => async dispatch => {
     const response = await camps.get(`/camps/${id}`);
@@ -28,8 +37,22 @@ export const createCamp = formValues => async (dispatch) => {
     //Do some programmatic navigation to
     //get the user back to the root route
 
-    //history.push('/');
+    // history.push('/');
 } 
+
+export const editCamp = (id, formValues) => async (dispatch) => {
+    const response = await camps.put(`/camps/${id}`, formValues );
+
+    dispatch({ type: EDIT_CAMP, payload: response.data });
+    console.log("dkfjsld");
+    history.push('/camps');
+}
+
+export const deleteCamp = (id) => async dispatch => {
+    await camps.delete(`/camps/${id}`);
+
+    dispatch({ type: DELETE_CAMP, payload: id });
+}
 
 
 

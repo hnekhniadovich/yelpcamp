@@ -16,7 +16,6 @@ router.get('/', function(req, res) {
 // SHOW - show more info about one campground
 router.get('/:id', function(req, res) {
     let id = req.params.id;
-    console.log(id);
     Camp.findById(id, function(err, camp) {
         if(err){
             console.log(err);
@@ -26,10 +25,11 @@ router.get('/:id', function(req, res) {
     });     
 });
 
+//NEW - show form to create new campground
 router.post('/', function(req, res){
     var name = req.body.name;
     var price = req.body.price;
-    var image = req.body.imageUrl;
+    var image = req.body.image;
     var description = req.body.description;
 
     var newCamp = {name: name, image: image, price: price, description: description};
@@ -42,5 +42,17 @@ router.post('/', function(req, res){
         }
     })
 })
+
+//UPDATE CAMPGROUND ROUTE
+router.put('/:id', function(req, res) {
+    console.log(req.body);
+    Camp.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, updatedCamp){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(updatedCamp);
+        }
+    });
+});
 
 module.exports = router;

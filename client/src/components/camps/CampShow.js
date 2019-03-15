@@ -16,7 +16,7 @@ class CampShow extends Component {
             return <div>Loading...</div>
         }
 
-        const { id, name, price, description, image } = this.props.camp;
+        const { _id, name, price, description, image } = this.props.camp;
      
         return (
             <div className="container" style={{marginTop: "20px"}}>
@@ -39,8 +39,8 @@ class CampShow extends Component {
                                 <p>
                                     <em>Submitted By USER</em>
                                 </p>
-                                <Link to={`/camps/edit/${id}`} className="btn btn-xs btn-warning">Edit</Link>
-                                <Link to="/camps/edit" className="btn btn-xs btn-danger">Delete</Link>
+                                <Link to={`/camps/edit/${_id}`} className="btn btn-xs btn-warning">Edit</Link>
+                                <Link to="/camps/delete" className="btn btn-xs btn-danger">Delete</Link>
                             </div>
                         </div>
                     </div>

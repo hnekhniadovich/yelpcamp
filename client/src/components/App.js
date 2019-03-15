@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import CampCreate from './camps/CampCreate';
 import CampDelete from './camps/CampDelete';
 import CampEdit from './camps/CampEdit';
@@ -8,11 +8,12 @@ import CampShow from './camps/CampShow';
 import Header from './Header';
 // import Footer from './Footer';
 import LandingPage from './LandingPage';
+import history from '../history';
 
 const App = () => {
     return (
         <div>
-            <BrowserRouter>
+            <Router history={history}>
                 <div>
                     <Header />
                     <Switch>
@@ -20,12 +21,12 @@ const App = () => {
                         <Route path="/camps" exact component={CampList} />
                         <Route path="/camps/new" exact component={CampCreate} />
                         <Route path="/camps/edit/:id" exact component={CampEdit} />
-                        <Route path="/camps/delete" exact component={CampDelete} />
+                        <Route path="/camps/delete/:id" exact component={CampDelete} />
                         <Route path="/camps/:id" exact component={CampShow} />
                     </Switch>
                     {/* <Footer /> */}
                 </div>
-            </BrowserRouter>
+            </Router>
         </div>
     )
 };
