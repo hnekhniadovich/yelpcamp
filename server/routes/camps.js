@@ -38,7 +38,7 @@ router.post('/', function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(newlyCreated);
+            return res.send(newlyCreated);
         }
     })
 })
@@ -50,9 +50,23 @@ router.put('/:id', function(req, res) {
         if(err){
             console.log(err);
         } else {
-            console.log(updatedCamp);
+            return res.send(updatedCamp);
         }
     });
 });
+
+// DESTROY CAMPGROUND ROUTE
+router.delete("/:id", function(req, res){
+    Camp.findByIdAndRemove(req.params.id, function(err, camp){
+       if(err){
+           console.log(err);
+       }
+        const response = {
+        message: "Camp successfully deleted",
+        id: camp._id
+    };
+        return res.status(200).send(response);
+    });
+ });
 
 module.exports = router;

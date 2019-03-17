@@ -1,50 +1,34 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import history from '../../history';
 
 class CampDelete extends Component {
-    constructor(props, context) {
-      super(props, context);
-  
-      this.handleShow = this.handleShow.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-  
-      this.state = {
-        show: false,
-      };
-    }
-  
-    handleClose() {
-      this.setState({ show: false });
-    }
-  
-    handleShow() {
-      this.setState({ show: true });
-    }
-  
-    render() {
-      return (
-        <>
-          <Button variant="primary" onClick={this.handleShow}>
-            Launch demo modal
-          </Button>
-  
-          <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={this.handleClose}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      );
-    }
+
+  renderActions() {
+    this.props.deleteCamp();
+    history.push("/camps");
   }
+
+  render() {
+    return (
+      <div>
+          <Modal show={this.props.show} onHide={this.props.close}>
+              <Modal.Header closeButton>
+                  <Modal.Title>Delete Campground</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Are you sure you want to delete this camp?</Modal.Body>
+              <Modal.Footer>
+                  <Button variant="secondary" onClick={() => this.renderActions()}>
+                  Delete
+                  </Button>
+                  <Button variant="primary" onClick={this.props.close}>
+                  Cancel
+                  </Button>
+              </Modal.Footer>
+          </Modal>
+      </div>
+    );
+  } 
+};
 
 export default CampDelete;

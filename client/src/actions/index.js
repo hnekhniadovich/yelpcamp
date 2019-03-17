@@ -31,21 +31,20 @@ export const fetchCamp = (id) => async dispatch => {
 
 export const createCamp = formValues => async (dispatch) => {
     const response = await camps.post('/camps', { ...formValues } );
-
+    
     dispatch({ type: CREATE_CAMP, payload: response.data });
 
     //Do some programmatic navigation to
     //get the user back to the root route
-
-    // history.push('/');
+    
+    history.push('/camps');
 } 
 
 export const editCamp = (id, formValues) => async (dispatch) => {
     const response = await camps.put(`/camps/${id}`, formValues );
 
     dispatch({ type: EDIT_CAMP, payload: response.data });
-    console.log("dkfjsld");
-    history.push('/camps');
+    history.push(`/camps/${id}`);
 }
 
 export const deleteCamp = (id) => async dispatch => {

@@ -14,9 +14,9 @@ export default (state={}, action) => {
         case FETCH_CAMP:
             return {...state, [action.payload._id]: action.payload };
         case CREATE_CAMP:
-            return {...state, [action.payload.id]: action.payload };
+            return {...state, [action.payload._id]: action.payload };
         case EDIT_CAMP:
-            return {...state, [action.payload.id]: action.payload };
+            return {...state, [action.payload._id]: action.payload };
         case DELETE_CAMP:
             return _.omit(state, action.payload);
     default:

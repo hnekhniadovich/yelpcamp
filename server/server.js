@@ -3,10 +3,13 @@ const express = require('express'),
       cors = require('cors'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
+      seedDB = require('./seeds');
       API_PORT = 3001;
 
 // requiring router
 const campRoutes = require('./routes/camps');
+
+seedDB();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));

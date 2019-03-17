@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCamp } from '../../actions';
+import { fetchCamp, deleteCamp } from '../../actions';
+import { Button } from 'react-bootstrap';
+import CampDelete from './CampDelete';
 
 class CampShow extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+    
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    
+        this.state = {
+          show: false,
+        };
+      }
+    
+      handleClose() {
+        this.setState({ show: false });
+      }
+    
+      handleShow() {
+        this.setState({ show: true });
+      }
     
     componentDidMount() {
          const { id } = this.props.match.params;
@@ -40,7 +61,17 @@ class CampShow extends Component {
                                     <em>Submitted By USER</em>
                                 </p>
                                 <Link to={`/camps/edit/${_id}`} className="btn btn-xs btn-warning">Edit</Link>
-                                <Link to="/camps/delete" className="btn btn-xs btn-danger">Delete</Link>
+                                {/* <Link to={`/camps/delete/${_id}`} onClick={this.handleShow} className="btn btn-xs btn-danger">Delete</Link> */}
+                                <Button variant="primary" onClick={this.handleShow}>
+                                    Delete
+                                </Button>
+
+
+                                <CampDelete
+                                    deleteCamp={() => this.props.deleteCamp(_id)}
+                                    show={this.state.show}
+                                    close={this.handleClose} >
+                                </CampDelete>
                             </div>
                         </div>
                     </div>
@@ -54,4 +85,4 @@ const mapStateToProps = (state, ownProps) => {
     return { camp: state.camps[ownProps.match.params.id] };
 }
 
-export default connect(mapStateToProps, { fetchCamp })(CampShow);
+export default connect(mapStateToProps, { deleteCamp, fetchCamp })(CampShow);
