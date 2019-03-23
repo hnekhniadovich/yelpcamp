@@ -6,7 +6,9 @@ import {
     FETCH_CAMP,
     CREATE_CAMP,
     EDIT_CAMP,
-    DELETE_CAMP
+    DELETE_CAMP,
+    CREATE_COMMENT,
+    EDIT_COMMENT,
  } from './types';
 
 export const fetchCamps = () => async dispatch => {
@@ -52,6 +54,39 @@ export const deleteCamp = (id) => async dispatch => {
 
     dispatch({ type: DELETE_CAMP, payload: id });
 }
+
+
+export const createComment = (id, formValues) => async (dispatch) => {
+    const response = await camps.post(`/camps/${id}/comments`, { ...formValues } );
+    
+    dispatch({
+        type: CREATE_COMMENT,
+        payload: {
+            data: response.data,
+            campId: id
+        }
+    });
+
+    history.push(`/camps/${id}`);
+}
+
+export const editComment = (id, comment_id, formValues) => async (dispatch) => {
+    const response = await camps.put(`/camps/${id}/comments/${comment_id}`, { ...formValues } );
+    
+    dispatch({
+        type: EDIT_COMMENT,
+        payload: {
+            data: response.data,
+            campId: id
+        }
+    });
+
+    history.push(`/camps/${id}`);
+}
+
+
+    
+ 
 
 
 
