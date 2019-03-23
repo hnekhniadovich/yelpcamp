@@ -12,7 +12,7 @@ class CampCreate extends Component {
     render() {
         return (
             <CampForm 
-                title='Create'
+                title='Create a New'
                 onSubmit={this.onSubmit} />
         )
     }

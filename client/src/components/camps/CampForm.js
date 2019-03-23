@@ -27,14 +27,13 @@ class CampForm extends Component {
     }
 
     onSubmit = (formValues) => {
-        // console.log(this.props);
         this.props.onSubmit(formValues);
     }
 
     render() {
         return (
             <div className="container" style={{marginTop: '60px'}}>
-                <h1 style={{textAlign: 'center', fontWeight: 600}}>{this.props.title} a New Campground</h1>
+                <h1 style={{textAlign: 'center', fontWeight: 600}}>{this.props.title} Campground</h1>
                 <div style={{width: '35%', margin: '40px auto'}}>
                     <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                         <Field 

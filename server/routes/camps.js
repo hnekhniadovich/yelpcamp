@@ -16,10 +16,11 @@ router.get('/', function(req, res) {
 // SHOW - show more info about one campground
 router.get('/:id', function(req, res) {
     let id = req.params.id;
-    Camp.findById(id, function(err, camp) {
+    Camp.findById(id).populate('comments').exec(function(err, camp) {
         if(err){
             console.log(err);
         } else {
+            console.log(camp);
             res.json(camp);
         }
     });     
@@ -45,7 +46,7 @@ router.post('/', function(req, res){
 
 //UPDATE CAMPGROUND ROUTE
 router.put('/:id', function(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     Camp.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, updatedCamp){
         if(err){
             console.log(err);

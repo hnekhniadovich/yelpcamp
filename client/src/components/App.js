@@ -1,14 +1,14 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import CampCreate from './camps/CampCreate';
-import CampDelete from './camps/CampDelete';
 import CampEdit from './camps/CampEdit';
 import CampList from './camps/CampList';
 import CampShow from './camps/CampShow';
 import Header from './Header';
-// import Footer from './Footer';
 import LandingPage from './LandingPage';
 import history from '../history';
+import CommentCreate from './comments/CommentCreate';
+import CommentEdit from './comments/CommentEdit';
 
 const App = () => {
     return (
@@ -21,10 +21,10 @@ const App = () => {
                         <Route path="/camps" exact component={CampList} />
                         <Route path="/camps/new" exact component={CampCreate} />
                         <Route path="/camps/edit/:id" exact component={CampEdit} />
-                        <Route path="/camps/delete/:id" exact component={CampDelete} />
                         <Route path="/camps/:id" exact component={CampShow} />
+                        <Route path="/camps/:id/comments/new" exact component={CommentCreate} />
+                        <Route path="/camps/:id/comments/:comment_id" exact component={CommentEdit} />
                     </Switch>
-                    {/* <Footer /> */}
                 </div>
             </Router>
         </div>

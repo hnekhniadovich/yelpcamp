@@ -31,6 +31,27 @@ class CampShow extends Component {
          this.props.fetchCamp(id);   
     }
 
+    renderComments() {
+        const { comments, _id } = this.props.camp;
+        return comments.map((comment, i) => 
+            <div key={i}>
+                <div className="row">
+                    <div className="col-md-12">
+                        <strong>{comment.author}</strong>
+                        <p className="font-italic">
+                            {comment.text}
+                        </p>
+                        <Link to={`/camps/${_id}/comments/${comment._id}`} 
+                        className="btn btn-xs btn-dark float-right"
+                        style={{width: "130px"}}>Edit</Link>
+                    
+                    </div>
+                </div>
+                <hr style={{margin: "5px"}}/>
+            </div >
+        );
+    }
+
     render() {
 
         if(!this.props.camp) {
@@ -51,32 +72,41 @@ class CampShow extends Component {
                         </div>
                     </div>
                     <div className="col-md-9">
-                        <div className="thumbnail">
-                            <img className="img-responsive" src={image} alt={name}/>
-                            <div className="caption-full">
-                                <h4>{price}/night</h4>
+                        <div className=".img-thumbnail">
+                            <img className="img-responsive" src={image} alt={name} style={{width: "100%", marginBottom: "20px"}}/>
+                            <div className="caption">
+                                <h4 className="float-right">${price}/night</h4>
                                 <h4>{name}</h4>
                                 <p>{description}</p>
                                 <p>
                                     <em>Submitted By USER</em>
                                 </p>
-                                <Link to={`/camps/edit/${_id}`} className="btn btn-xs btn-warning">Edit</Link>
-                                {/* <Link to={`/camps/delete/${_id}`} onClick={this.handleShow} className="btn btn-xs btn-danger">Delete</Link> */}
-                                <Button variant="primary" onClick={this.handleShow}>
+                                <Link to={`/camps/edit/${_id}`} className="btn btn-xs btn-warning" style={{width: "90px", marginRight: "10px"}}>Edit</Link>
+                                <Button variant="primary" onClick={this.handleShow} style={{width: "90px"}}>
                                     Delete
                                 </Button>
-
-
+                                
                                 <CampDelete
                                     deleteCamp={() => this.props.deleteCamp(_id)}
                                     show={this.state.show}
                                     close={this.handleClose} >
                                 </CampDelete>
+
+                            </div>
+                        </div>
+
+                        <div className="well">
+                            <div className="text-right">
+                                <Link to={`/camps/${_id}/comments/new`} className="btn btn-success" style={{width: "130px"}}>Add Comment</Link>
+                            </div>
+                            <hr />
+                            <div>
+                                {this.renderComments()}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>  
         );
     };
 };

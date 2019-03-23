@@ -3,3 +3,5 @@ export const FETCH_CAMP = 'FETCH_CAMP';
 export const CREATE_CAMP = 'CREATE_CAMP';
 export const EDIT_CAMP = 'EDIT_CAMP';
 export const DELETE_CAMP = 'DELETE_CAMP';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';

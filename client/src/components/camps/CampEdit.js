@@ -14,7 +14,6 @@ class CampEdit extends Component {
         this.props.editCamp(this.props.match.params.id, formValues);
     }
 
-
     render() {
         if(!this.props.camp) {
             return <div>Loading...</div>
