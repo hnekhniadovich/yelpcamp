@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var Camp = require('../models/camp.model');
+const express = require('express');
+const router = express.Router();
+const Camp = require('../models/camp.model');
+const passport = require('passport');
 
 // INDEX - show all campgrounds
 router.get('/', function(req, res) {
@@ -14,26 +15,29 @@ router.get('/', function(req, res) {
 });
 
 // SHOW - show more info about one campground
-router.get('/:id', function(req, res) {
+router.get('/:id', passport.authenticate('jwt', {
+    session: false }),
+function(req, res) {
     let id = req.params.id;
     Camp.findById(id).populate('comments').exec(function(err, camp) {
         if(err){
             console.log(err);
         } else {
-            console.log(camp);
             res.json(camp);
         }
     });     
 });
 
 //NEW - show form to create new campground
-router.post('/', function(req, res){
-    var name = req.body.name;
-    var price = req.body.price;
-    var image = req.body.image;
-    var description = req.body.description;
+router.post('/', passport.authenticate('jwt', {
+    session: false }),
+function(req, res){
+    const name = req.body.name;
+    const price = req.body.price;
+    const image = req.body.image;
+    const description = req.body.description;
 
-    var newCamp = {name: name, image: image, price: price, description: description};
+    const newCamp = {name: name, image: image, price: price, description: description};
 
     Camp.create(newCamp, function(err, newlyCreated){
         if(err){
@@ -45,8 +49,9 @@ router.post('/', function(req, res){
 })
 
 //UPDATE CAMPGROUND ROUTE
-router.put('/:id', function(req, res) {
-    //console.log(req.body);
+router.put('/:id', passport.authenticate('jwt', {
+    session: false }),
+function(req, res) {
     Camp.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, updatedCamp){
         if(err){
             console.log(err);
@@ -57,7 +62,9 @@ router.put('/:id', function(req, res) {
 });
 
 // DESTROY CAMPGROUND ROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", passport.authenticate('jwt', {
+    session: false }),
+function(req, res){
     Camp.findByIdAndRemove(req.params.id, function(err, camp){
        if(err){
            console.log(err);

@@ -10,8 +10,8 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end">
                 <Nav>
-                    <Link to="/signin" className="nav-link">Login</Link>
-                    <Link to="/signup" className="nav-link">Sign Up</Link>
+                    <Link to="/login" className="nav-link">Login</Link>
+                    <Link to="/register" className="nav-link">Sign Up</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

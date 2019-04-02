@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router({mergeParams: true});
-var Camp = require('../models/camp.model');
-var Comment = require('../models/comment.model');
+const express = require('express');
+const router = express.Router({mergeParams: true});
+const Camp = require('../models/camp.model');
+const Comment = require('../models/comment.model');
+const passport = require('passport');
 
-router.get('/:comment_id', function(req, res){
+router.get('/:comment_id', passport.authenticate('jwt', {
+    session: false }),
+function(req, res){
     Comment.findById(req.params.comment_id, function(err, comment){
         if(err) {
             console.log(err)
@@ -13,15 +16,18 @@ router.get('/:comment_id', function(req, res){
     }) 
 });
 
-router.post('/', function(req, res){
+router.post('/', passport.authenticate('jwt', {
+    session: false }),
+function(req, res){
+    //console.log(req.user);
     Camp.findById(req.params.id, function(err, camp){
         if(err){
             console.log(err);
         } else {
-            var text = req.body.text;
-            var author = req.body.author;
+            const text = req.body.text;
+            const author = req.body.author;
 
-            var newComment = {text: text, author: author}
+            const newComment = {text: text, author: author}
             Comment.create(newComment, function(err, newComment){
                 if(err){
                     console.log(err);
@@ -37,7 +43,9 @@ router.post('/', function(req, res){
     })
 })
 
-router.put("/:comment_id", function(req, res){
+router.put("/:comment_id", passport.authenticate('jwt', {
+    session: false }),
+function(req, res){
     Comment.findByIdAndUpdate(req.params.comment_id, req.body, {new: true}, function(err, updatedComment){
        if(err){
            console.log(err);
@@ -47,7 +55,9 @@ router.put("/:comment_id", function(req, res){
     });
  });
 
-router.delete("/:comment_id", function(req, res){
+router.delete("/:comment_id", passport.authenticate('jwt', {
+    session: false }),
+function(req, res){
     Comment.findByIdAndRemove(req.params.comment_id, function(err, comment){
        if(err){
             console.log(err);
