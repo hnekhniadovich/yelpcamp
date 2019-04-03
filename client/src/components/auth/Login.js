@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { loginUser } from '../../actions/authActions';
+import { connect } from 'react-redux';
+import history from '../../history';
 
 class Login extends Component {
     constructor() {
@@ -14,6 +17,21 @@ class Login extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            history.push('/camps');
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.auth.isAuthenticated) {
+            history.push('/camps');
+        }
+        if(nextProps.errors) {
+            this.setState({errors: nextProps.errors})
+        }    
+    }
+
     onChange(e) {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -22,9 +40,11 @@ class Login extends Component {
         e.preventDefault();
 
         const userData = {
-            username: this.state.email,
+            username: this.state.username,
             password: this.state.password
         }
+
+        this.props.loginUser(userData);
     }
 
     render() {
@@ -39,12 +59,13 @@ class Login extends Component {
                         <p className="lead text-center">Sign in to your YelpCamp account</p>
                         <form noValidate onSubmit={this.onSubmit}>
                             <TextFieldGroup
-                                placeholder="Email Address"
-                                name="email"
-                                type="email"
-                                value={this.state.email}
+                                placeholder="Username"
+                                name="username"
+                                type="username"
+                                value={this.state.username}
                                 onChange={this.onChange}
-                                error={errors.email}
+                                error={errors.username}
+                                autoComplete="new-username"
                             />
 
                             <TextFieldGroup
@@ -54,6 +75,7 @@ class Login extends Component {
                                 value={this.state.password}
                                 onChange={this.onChange}
                                 error={errors.password}
+                                autoComplete="new-password"
                             />
                             
                             <input 
@@ -69,5 +91,9 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+    errors: state.errors
+})
 
-export default Login;
+export default connect(mapStateToProps, { loginUser })(Login);

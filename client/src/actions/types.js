@@ -5,3 +5,5 @@ export const EDIT_CAMP = 'EDIT_CAMP';
 export const DELETE_CAMP = 'DELETE_CAMP';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';

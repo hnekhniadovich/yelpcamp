@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCamps } from '../../actions';
+import { fetchCamps } from '../../actions/campActions';
 
 import { Jumbotron, Card } from 'react-bootstrap';
 import './CampList.css';

@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editComment } from '../../actions';
+import { editComment } from '../../actions/campActions';
 import CommentForm from './CommentForm';
 
 class CommentEdit extends Component {

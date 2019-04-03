@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCamp, editCamp } from  '../../actions';
+import { fetchCamp, editCamp } from  '../../actions/campActions';
 import CampForm from './CampForm';
 
 class CampEdit extends Component {

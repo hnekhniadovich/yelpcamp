@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createCamp } from '../../actions';
+import { createCamp } from '../../actions/campActions';
 import CampForm from './CampForm';
 
 class CampCreate extends Component {

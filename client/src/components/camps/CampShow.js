@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCamp, deleteCamp } from '../../actions';
+import { fetchCamp, deleteCamp } from '../../actions/campActions';
 import { Button } from 'react-bootstrap';
 import CampDelete from './CampDelete';
 

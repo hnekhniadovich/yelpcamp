@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
 
 class Register extends Component {
     constructor() {
@@ -14,6 +16,12 @@ class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({errors: nextProps.errors})
+        }
+    }
+
     onChange(e) {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -21,15 +29,18 @@ class Register extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const userData = {
-            username: this.state.email,
+        const newUser = {
+            username: this.state.username,
             password: this.state.password
-        }
+        };
+
+        this.props.registerUser(newUser);
+
     }
 
     render() {
         const { errors } = this.state;
-
+    
         return (
             <div className="register">
                 <div className="container">
@@ -37,14 +48,15 @@ class Register extends Component {
                         <div className="col-md-5 m-auto">
                         <h1 className="display-6 text-center mt-5">Sign Up</h1>
                         <p className="lead text-center">Create your YelpCamp account</p>
-                        <form noValidate onSubmit={this.onSubmit}>
+                        <form noValidate onSubmit={this.onSubmit} >
                             <TextFieldGroup
-                                placeholder="Email Address"
-                                name="email"
-                                type="email"
-                                value={this.state.email}
+                                placeholder="Username"
+                                name="username"
+                                type="username"
+                                value={this.state.username}
                                 onChange={this.onChange}
-                                error={errors.email}
+                                error={errors.username}
+                                autoComplete="new-username"
                             />
 
                             <TextFieldGroup
@@ -54,6 +66,7 @@ class Register extends Component {
                                 value={this.state.password}
                                 onChange={this.onChange}
                                 error={errors.password}
+                                autoComplete="new-password"
                             />
                             
                             <input 
@@ -69,5 +82,10 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.auths,
+    errors: state.errors
+})
 
-export default Register;
+
+export default connect(mapStateToProps, { registerUser })(Register);
