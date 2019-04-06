@@ -8,7 +8,6 @@ const express = require('express'),
 
 // requiring router
 const campRoutes = require('./routes/camps');
-const commentRoutes = require('./routes/comments');
 const indexRoutes = require('./routes/index');
 
 app.use(cors());
@@ -26,7 +25,6 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/camps', campRoutes);
-app.use('/camps/:id/comments', commentRoutes);
 app.use('/', indexRoutes);
 
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));

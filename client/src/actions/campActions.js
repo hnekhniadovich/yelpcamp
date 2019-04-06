@@ -7,8 +7,7 @@ import {
     CREATE_CAMP,
     EDIT_CAMP,
     DELETE_CAMP,
-    CREATE_COMMENT,
-    EDIT_COMMENT,
+    CREATE_COMMENT
  } from './types';
 
 export const fetchCamps = () => async dispatch => {
@@ -17,13 +16,6 @@ export const fetchCamps = () => async dispatch => {
     dispatch({ type: FETCH_CAMPS, payload: response.data });
 };
 
-// export const fetchCamps = () => dispatch => {
-//     return axios.get('http://localhost:3001.get/camps')
-//     .then(response => {
-//         dispatch({ type: FETCH_CAMPS, payload: response.data });
-//     })
-//     .catch(error => console.log(error));
-// };
 
 export const fetchCamp = (id) => async dispatch => {
     const response = await camps.get(`/camps/${id}`);
@@ -55,9 +47,8 @@ export const deleteCamp = (id) => async dispatch => {
     dispatch({ type: DELETE_CAMP, payload: id });
 }
 
-
 export const createComment = (id, formValues) => async (dispatch) => {
-    const response = await camps.post(`/camps/${id}/comments`, { ...formValues } );
+    const response = await camps.post(`/camps/${id}/comment`, { ...formValues } );
     
     dispatch({
         type: CREATE_COMMENT,
@@ -70,18 +61,13 @@ export const createComment = (id, formValues) => async (dispatch) => {
     history.push(`/camps/${id}`);
 }
 
-export const editComment = (id, comment_id, formValues) => async (dispatch) => {
-    const response = await camps.put(`/camps/${id}/comments/${comment_id}`, { ...formValues } );
-    
-    dispatch({
-        type: EDIT_COMMENT,
-        payload: {
-            data: response.data,
-            campId: id
-        }
-    });
+export const deleteComment = (id, comment_id) => async dispatch => {
+    const response = await camps.delete(`/camps/${id}/comment/${comment_id}`);
 
-    history.push(`/camps/${id}`);
+    dispatch({
+        type: FETCH_CAMP,
+        payload: response.data
+    });
 }
 
 

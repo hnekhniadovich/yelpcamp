@@ -30,11 +30,6 @@ class CommentForm extends Component {
                             component={this.renderInput} 
                             type="text"
                             placeholder="text"/>
-                        <Field 
-                            name="author" 
-                            component={this.renderInput} 
-                            type="text"
-                            placeholder="author"/>
                         <Button variant="primary" type="submit" style={{width: '100%'}}>Submit</Button>
                     </form>
                 </div>

@@ -6,16 +6,27 @@ const campSchema = new mongoose.Schema({
     image: String,
     description: String,
     author: {
-        id: {
            type: mongoose.Schema.Types.ObjectId,
            ref: "User"
-        },
-        username: String
+        
     },
-    comments: [
+    username: {
+        type: String,
+        ref: "User"
+     
+    },
+    comments: [ 
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment'
+            text: String,
+            author: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            username: {
+                type: String,
+                ref: "User"
+             
+            },
         }
     ]
 })

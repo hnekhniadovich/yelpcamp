@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCamp, deleteCamp } from '../../actions/campActions';
+import { fetchCamp, deleteCamp, deleteComment } from '../../actions/campActions';
 import { Button } from 'react-bootstrap';
 import CampDelete from './CampDelete';
 
@@ -31,19 +31,29 @@ class CampShow extends Component {
          this.props.fetchCamp(id);   
     }
 
+    onDeleteClick(campId, commentId) {
+        this.props.deleteComment(campId, commentId);
+    }
+
     renderComments() {
         const { comments, _id } = this.props.camp;
+        const { user } = this.props.auth;
+    
         return comments.map((comment, i) => 
             <div key={i}>
                 <div className="row">
                     <div className="col-md-12">
-                        <strong>{comment.author}</strong>
+                        <strong>{comment.username}</strong>
                         <p className="font-italic">
                             {comment.text}
                         </p>
-                        <Link to={`/camps/${_id}/comments/${comment._id}`} 
-                        className="btn btn-xs btn-dark float-right"
-                        style={{width: "130px"}}>Edit</Link>
+                        <div className="float-right" >
+                            {comment.author === user.id ? ( 
+                            <button onClick={this.onDeleteClick.bind(this, _id, comment._id)}
+                                className="btn btn-danger"
+                            >Delete</button>
+                            ) : null}
+                        </div>
                     
                     </div>
                 </div>
@@ -59,6 +69,8 @@ class CampShow extends Component {
         }
 
         const { _id, name, price, description, image } = this.props.camp;
+        const { user } = this.props.auth;
+        const { camp } = this.props;     
      
         return (
             <div className="container" style={{marginTop: "20px"}}>
@@ -79,13 +91,16 @@ class CampShow extends Component {
                                 <h4>{name}</h4>
                                 <p>{description}</p>
                                 <p>
-                                    <em>Submitted By USER</em>
+                                    <em>Submitted By {camp.username}</em>
                                 </p>
-                                <Link to={`/camps/edit/${_id}`} className="btn btn-xs btn-warning" style={{width: "90px", marginRight: "10px"}}>Edit</Link>
-                                <Button variant="primary" onClick={this.handleShow} style={{width: "90px"}}>
-                                    Delete
-                                </Button>
-                                
+                                {camp.author === user.id ? ( 
+                                    <>
+                                    <Link to={`/camps/edit/${_id}`} className="btn btn-info" style={{width: "90px", marginRight: "10px"}}>Edit</Link>
+                                    <Button className="btn btn-danger" onClick={this.handleShow} style={{width: "90px"}}>
+                                        Delete
+                                    </Button>
+                                    </>
+                                ) : null}
                                 <CampDelete
                                     deleteCamp={() => this.props.deleteCamp(_id)}
                                     show={this.state.show}
@@ -97,7 +112,7 @@ class CampShow extends Component {
 
                         <div className="well">
                             <div className="text-right">
-                                <Link to={`/camps/${_id}/comments/new`} className="btn btn-success" style={{width: "130px"}}>Add Comment</Link>
+                                <Link to={`/camps/${_id}/comments/new`} className="btn btn-dark" style={{width: "130px"}}>Add Comment</Link>
                             </div>
                             <hr />
                             <div>
@@ -111,8 +126,10 @@ class CampShow extends Component {
     };
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return { camp: state.camps[ownProps.match.params.id] };
-}
+const mapStateToProps = (state, ownProps) => ({
+    // return { camp: state.camps[ownProps.match.params.id] };
+    camp: state.camps[ownProps.match.params.id],
+    auth: state.auth
+})
 
-export default connect(mapStateToProps, { deleteCamp, fetchCamp })(CampShow);
+export default connect(mapStateToProps, { deleteCamp, fetchCamp, deleteComment })(CampShow);

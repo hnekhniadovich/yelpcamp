@@ -12,6 +12,7 @@ class CampEdit extends Component {
 
     onSubmit = (formValues) => {
         this.props.editCamp(this.props.match.params.id, formValues);
+
     }
 
     render() {
