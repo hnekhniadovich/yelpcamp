@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "gulp-header": "1.8.2",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
