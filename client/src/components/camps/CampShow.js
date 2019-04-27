@@ -85,7 +85,7 @@ class CampShow extends Component {
                     </div>
                     <div className="col-md-9">
                         <div className=".img-thumbnail">
-                            <img className="img-responsive" src={image} alt={name} style={{width: "100%", marginBottom: "20px"}}/>
+                            <img className="img-responsive" src={image} alt={name} style={{width: "100%", marginBottom: "20px", height: "550px"}}/>
                             <div className="caption">
                                 <h4 className="float-right">${price}/night</h4>
                                 <h4>{name}</h4>

@@ -104,7 +104,6 @@ function(req, res){
         if(err){
             console.log(err);
         } else {
-            console.log(req.user);
             const text = req.body.text;
             const author = req.user.id;
             const username = req.user.username;
@@ -144,7 +143,5 @@ function(req, res){
         camp.save().then(camp => res.json(camp));
     });
 });
-
-
 
 module.exports = router;

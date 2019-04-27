@@ -4,14 +4,7 @@ import './LandingPage.css';
 
 class LandingPage extends Component {
 
-    componentWillUnmount() {
-        document.body.style.backgroundColor = "white";
-    }
-
     render() {
-
-        
-
         return (
             <>
                 <div id="landing-header">

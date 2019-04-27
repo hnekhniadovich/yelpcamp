@@ -16,8 +16,8 @@ class CampList extends Component {
         return this.props.camps.map((camp) => {
             return (
                 <div className="col-md-3 col-sm-6" style={{margin: "10px 0"}} key={camp._id}>
-                    <Card className="text-center">
-                        <Card.Img variant="top" src={camp.image} />
+                    <Card className="text-center" >
+                        <Card.Img variant="top" src={camp.image} style={{height: "200px"}} />
                         <Card.Body>
                         <Card.Title>{camp.name}</Card.Title>
                         <Link to={`camps/${camp._id}`} className="btn btn-info">More info</Link>
