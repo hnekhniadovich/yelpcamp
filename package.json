@@ -1,8 +1,8 @@
 {
-  "name": "server",
+  "name": "yelpcamp",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "gulp-header": "1.8.2",
   "scripts": {
     "client-install": "npm install --prefix client",
