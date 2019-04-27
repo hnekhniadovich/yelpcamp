@@ -3,7 +3,8 @@ const express = require('express'),
       cors = require('cors'),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
-      passport = require('passport')
+      passport = require('passport'),
+      path = require('path');
 
 // requiring router
 const campRoutes = require('./routes/camps');
