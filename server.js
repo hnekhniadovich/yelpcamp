@@ -11,12 +11,12 @@ const campRoutes = require('./routes/camps');
 const indexRoutes = require('./routes/index');
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // DB Config
 const db = require('./config/keys').mongoURI;
-console.log(db);
+console.log("database " + db);
 
 // Connect to MongoDB
 mongoose
