@@ -1,5 +1,5 @@
 ## YelpCamp
-> 
+> NodeJS web application built with ES6 + Syntax, React, Redux With DevTools, RESTFUL Routing, PassportJS, ExpressJS, JWT (JSON Web Tokens), Postman HTTP Client, Mongoose/MongoDB/Atlas, Bcrypt Password Hashing, Heroku & Git Deployment, Responsive Design.
 
 ## Quick Start
 ```
